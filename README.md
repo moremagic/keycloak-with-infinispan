@@ -1,5 +1,5 @@
 # keycloak-with-infinispan
-keycloak Dockerfile(with infinispan)
+Keycloak Dockerfile(with remote Infinispan)
 
 ## quickstart
 
