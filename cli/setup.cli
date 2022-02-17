@@ -1,0 +1,31 @@
+embed-server --server-config=standalone-ha.xml --std-out=echo
+batch
+
+# proxy-address-forwarding
+/subsystem=undertow/server=default-server/http-listener=default/:write-attribute(name=proxy-address-forwarding,value=true)
+
+# access-log
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:add
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name="use-server-log",value="true")
+
+# Debug logging
+/subsystem=logging/logger=org.jgroups:add
+/subsystem=logging/logger=org.jgroups:write-attribute(name=level,value=DEBUG)
+
+/subsystem=logging/logger=org.keycloak.cluster.infinispan:add
+/subsystem=logging/logger=org.keycloak.cluster.infinispan:write-attribute(name=level,value=DEBUG)
+
+/subsystem=logging/logger=org.keycloak.connections.infinispan:add
+/subsystem=logging/logger=org.keycloak.connections.infinispan:write-attribute(name=level,value=DEBUG)
+
+/subsystem=logging/logger=org.keycloak.models.cache.infinispan:add
+/subsystem=logging/logger=org.keycloak.models.cache.infinispan:write-attribute(name=level,value=DEBUG)
+
+/subsystem=logging/logger=org.keycloak.models.sessions.infinispan:add
+/subsystem=logging/logger=org.keycloak.models.sessions.infinispan:write-attribute(name=level,value=DEBUG)
+
+/subsystem=logging/console-handler=CONSOLE/:write-attribute(name=level,value=DEBUG)
+
+run-batch
+stop-embedded-server
+
