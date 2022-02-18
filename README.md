@@ -36,7 +36,7 @@ docker run --name insp-srv --net insp-work -dp 11222:11222 -e USER="admin" -e PA
   "distributed-cache": {
     "mode": "SYNC",
     "encoding": {
-      "media-type": ""application/x-jboss-marshalling"
+      "media-type": "application/x-jboss-marshalling"
     },
     "statistics": true
   }
